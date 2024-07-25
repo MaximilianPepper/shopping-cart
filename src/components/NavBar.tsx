@@ -8,10 +8,14 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import reactLogo from "../assets/react.svg";
-
+import { useSelector } from "react-redux";
 function NavBar() {
-  //const [cartItemCount, setCartItemCount] = useState(3); // Example item count
+  const cart = useSelector((state) => state.cart);
 
+  let cartCounter = 0;
+  if (Array.isArray(cart) && cart.length > 0) {
+    cartCounter = cart.reduce((a, c) => a + (c.amount || 0), 0);
+  }
   return (
     <AppBar
       position="fixed"
@@ -71,7 +75,7 @@ function NavBar() {
               to="/checkout"
               style={{ textDecoration: "none", color: "inherit" }}
             >
-              <Badge badgeContent={2} color="secondary">
+              <Badge badgeContent={cartCounter} color="secondary">
                 <ShoppingCartIcon sx={{ fontSize: "2em" }} />
               </Badge>
             </Link>

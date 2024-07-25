@@ -1,5 +1,5 @@
 import * as React from "react";
-
+import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
@@ -10,15 +10,14 @@ import Stack from "@mui/material/Stack";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Stepper from "@mui/material/Stepper";
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+
 import Typography from "@mui/material/Typography";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { PaletteMode } from "@mui/material";
 
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
-import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
+
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 
@@ -29,52 +28,7 @@ import InfoMobile from "./InfoMobile";
 import PaymentForm from "./PaymentForm";
 import Review from "./Review";
 import ToggleColorMode from "./ToggleColorMode";
-import SitemarkIcon from "./SitemarkIcon";
 
-interface ToggleCustomThemeProps {
-  showCustomTheme: Boolean;
-  toggleCustomTheme: () => void;
-}
-
-function ToggleCustomTheme({
-  showCustomTheme,
-  toggleCustomTheme,
-}: ToggleCustomThemeProps) {
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        width: "100dvw",
-        position: "fixed",
-        bottom: 24,
-      }}
-    >
-      <ToggleButtonGroup
-        color="primary"
-        exclusive
-        value={showCustomTheme}
-        onChange={toggleCustomTheme}
-        aria-label="Toggle design language"
-        sx={{
-          backgroundColor: "background.default",
-          "& .Mui-selected": {
-            pointerEvents: "none",
-          },
-        }}
-      >
-        <ToggleButton value>
-          <AutoAwesomeRoundedIcon sx={{ fontSize: "20px", mr: 1 }} />
-          Custom theme
-        </ToggleButton>
-        <ToggleButton data-screenshot="toggle-default-theme" value={false}>
-          Material Design 2
-        </ToggleButton>
-      </ToggleButtonGroup>
-    </Box>
-  );
-}
 const steps = ["Shipping address", "Payment details", "Review your order"];
 function getStepContent(step: number) {
   switch (step) {
@@ -97,9 +51,7 @@ export default function Checkout() {
   const toggleColorMode = () => {
     setMode((prev) => (prev === "dark" ? "light" : "dark"));
   };
-  const toggleCustomTheme = () => {
-    setShowCustomTheme((prev) => !prev);
-  };
+
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
@@ -109,10 +61,7 @@ export default function Checkout() {
   return (
     <ThemeProvider theme={showCustomTheme ? checkoutTheme : defaultTheme}>
       <CssBaseline />
-      <Grid
-        container
-        sx={{ height: { xs: "100%", sm: "100dvh" }, marginTop: "100px" }}
-      >
+      <Grid container sx={{ height: { xs: "100%", sm: "100dvh" } }}>
         <Grid
           item
           xs={12}
@@ -130,17 +79,18 @@ export default function Checkout() {
             gap: 4,
           }}
         >
-          <Box sx={{ display: "flex", alignItems: "end", height: 150 }}>
-            <Button
-              startIcon={<ArrowBackRoundedIcon />}
-              component="a"
-              href="/material-ui/getting-started/templates/"
-              sx={{ ml: "-8px" }}
-            >
-              Back to
-              <SitemarkIcon />
-            </Button>
-          </Box>
+          <Link to="/shop">
+            <Box sx={{ display: "flex", alignItems: "end", height: 150 }}>
+              <Button
+                startIcon={<ArrowBackRoundedIcon />}
+                component="p"
+                href="/material-ui/getting-started/templates/"
+                sx={{ ml: "-8px" }}
+              >
+                Back to Shop
+              </Button>
+            </Box>
+          </Link>
           <Box
             sx={{
               display: "flex",
@@ -193,8 +143,7 @@ export default function Checkout() {
                 href="/material-ui/getting-started/templates/"
                 sx={{ alignSelf: "start" }}
               >
-                Back to
-                <SitemarkIcon />
+                Back to {/*fix this */}
               </Button>
               <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
             </Box>
@@ -359,10 +308,6 @@ export default function Checkout() {
           </Box>
         </Grid>
       </Grid>
-      <ToggleCustomTheme
-        toggleCustomTheme={toggleCustomTheme}
-        showCustomTheme={showCustomTheme}
-      />
     </ThemeProvider>
   );
 }

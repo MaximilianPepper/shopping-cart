@@ -11,6 +11,7 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 const ProductCard = ({ obj }) => {
   const [quantity, setQuantity] = useState(0);
@@ -18,6 +19,7 @@ const ProductCard = ({ obj }) => {
   const image = obj.image;
   // const description = obj.description; removed this because i want to create a route to display information (TODO)
   const price = obj.price;
+  const dispatch = useDispatch();
   const handleIncrease = () => {
     setQuantity(quantity + 1);
   };
@@ -25,6 +27,13 @@ const ProductCard = ({ obj }) => {
   const handleDecrease = () => {
     if (quantity > 0) {
       setQuantity(quantity - 1);
+    }
+  };
+
+  const addToCart = () => {
+    if (quantity > 0) {
+      dispatch({ type: "ADD_TO_CART", payload: obj, amount: quantity });
+      setQuantity(0);
     }
   };
 
@@ -67,7 +76,7 @@ const ProductCard = ({ obj }) => {
             <AddIcon />
           </IconButton>
         </Box>
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={addToCart}>
           Add to Cart
         </Button>
       </CardActions>
