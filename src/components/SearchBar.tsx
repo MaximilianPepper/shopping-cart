@@ -2,23 +2,23 @@ import { useState } from "react";
 import {
   Box,
   TextField,
-  Button,
   IconButton,
   Menu,
   MenuItem,
   FormControlLabel,
-  Checkbox,
+  Radio,
+  RadioGroup,
 } from "@mui/material";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import { useDispatch, useSelector } from "react-redux";
 
 const SearchBar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [filters, setFilters] = useState({
-    filter1: false,
-    filter2: false,
-    filter3: false,
-    filter4: false,
-  });
+  const [search, setSearch] = useState("");
+
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categories);
+  const categoryFilter = useSelector((state) => state.filter.category);
 
   const handleToggleFilters = (event) => {
     setAnchorEl(event.currentTarget);
@@ -28,11 +28,18 @@ const SearchBar = () => {
     setAnchorEl(null);
   };
 
+  const handleProductSearch = (event) => {
+    const newSearchFilter = event.target.value;
+    setSearch(newSearchFilter);
+    dispatch({ type: "FILTER", payload: newSearchFilter });
+  };
+
   const handleFilterChange = (event) => {
-    setFilters({
-      ...filters,
-      [event.target.name]: event.target.checked,
-    });
+    const selectedValue = event.target.value;
+    dispatch({ type: "CATEGORY", payload: selectedValue });
+
+    // debug
+    console.log("Selected Filter:", selectedValue);
   };
 
   return (
@@ -46,7 +53,13 @@ const SearchBar = () => {
         margin: "auto",
       }}
     >
-      <TextField variant="outlined" placeholder="Search..." sx={{ flex: 1 }} />
+      <TextField
+        variant="outlined"
+        placeholder="Search..."
+        sx={{ flex: 1 }}
+        value={search}
+        onChange={handleProductSearch}
+      />
       <IconButton onClick={handleToggleFilters}>
         <FilterListIcon />
       </IconButton>
@@ -60,58 +73,19 @@ const SearchBar = () => {
           },
         }}
       >
-        <MenuItem>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={filters.filter1}
-                onChange={handleFilterChange}
-                name="filter1"
-              />
-            }
-            label="Filter 1"
-          />
-        </MenuItem>
-        <MenuItem>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={filters.filter2}
-                onChange={handleFilterChange}
-                name="filter2"
-              />
-            }
-            label="Filter 2"
-          />
-        </MenuItem>
-        <MenuItem>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={filters.filter3}
-                onChange={handleFilterChange}
-                name="filter3"
-              />
-            }
-            label="Filter 3"
-          />
-        </MenuItem>
-        <MenuItem>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={filters.filter4}
-                onChange={handleFilterChange}
-                name="filter4"
-              />
-            }
-            label="Filter 4"
-          />
-        </MenuItem>
+        <RadioGroup value={categoryFilter} onChange={handleFilterChange}>
+          <MenuItem>
+            <FormControlLabel control={<Radio />} value="all" label="all" />
+          </MenuItem>
+          {categories.map((c) => {
+            return (
+              <MenuItem key={c}>
+                <FormControlLabel control={<Radio />} value={c} label={c} />
+              </MenuItem>
+            );
+          })}
+        </RadioGroup>
       </Menu>
-      <Button variant="contained" color="primary">
-        Search
-      </Button>
     </Box>
   );
 };

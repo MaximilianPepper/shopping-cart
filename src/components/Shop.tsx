@@ -1,22 +1,44 @@
 import { Container } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import shopService from "../services/store";
 import ProductCard from "./ProductCard";
 import SearchBar from "./SearchBar";
-import { Margin } from "@mui/icons-material";
+import { useSelector, useDispatch } from "react-redux";
 
 const Shop = () => {
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]); using redux now REMOVE
+  // redux vars
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.products);
+  const filter = useSelector((state) => state.filter.search);
+  const category = useSelector((state) => state.filter.category);
   useEffect(() => {
     const getData = async () => {
-      const test = await shopService.getTestData();
-      setData(test);
+      try {
+        const products = await shopService.getAllData();
+
+        dispatch({ type: "SET", payload: products });
+      } catch (error) {
+        console.error("Failed to fetch data:", error);
+      }
     };
     getData();
-  }, []);
+  }, [dispatch]);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const fetchedCategories = await shopService.getAllCategory();
+
+        dispatch({ type: "CATEGORIES", payload: fetchedCategories });
+      } catch (error) {
+        console.error("Failed to fetch categories:", error);
+      }
+    };
+    getData();
+  }, [dispatch]);
   return (
     <div style={{ marginTop: "100px" }}>
-      <SearchBar sx={{ width: "50%" }} />
+      <SearchBar />
       <Container
         maxWidth={false}
         disableGutters
@@ -31,9 +53,12 @@ const Shop = () => {
           padding: 2,
         }}
       >
-        {data.map((i) => (
-          <ProductCard key={i.id} obj={i} />
-        ))}
+        {data
+          .filter((i) => category === "all" || i.category === category)
+          .filter((i) => i.title.toLowerCase().includes(filter))
+          .map((i) => (
+            <ProductCard key={i.id} obj={i} />
+          ))}
       </Container>
     </div>
   );

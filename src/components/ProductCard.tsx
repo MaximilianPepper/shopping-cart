@@ -29,7 +29,7 @@ const ProductCard = ({ obj }) => {
   };
 
   return (
-    <Card sx={{ width: 345, margin: "20px", height: 400 }}>
+    <Card sx={{ width: 345, margin: "20px", height: 450 }}>
       <CardMedia
         component="img"
         alt={title}
@@ -38,10 +38,16 @@ const ProductCard = ({ obj }) => {
         style={{
           width: "100%",
           objectFit: "contain", // Ensures the entire image is visible
+          marginTop: "5px",
         }}
       />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+      <CardContent sx={{ height: "150px" }}>
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          sx={{ overflow: "hidden", textOverflow: "ellipsis", height: "128px" }}
+        >
           {title}
         </Typography>
 
