@@ -4,14 +4,14 @@ import shopService from "../services/store";
 import ProductCard from "./ProductCard";
 import SearchBar from "./SearchBar";
 import { useSelector, useDispatch } from "react-redux";
+import { StateType } from "../types";
 
 const Shop = () => {
-  // const [data, setData] = useState([]); using redux now REMOVE
   // redux vars
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.products);
-  const filter = useSelector((state) => state.filter.search);
-  const category = useSelector((state) => state.filter.category);
+  const data = useSelector((state: StateType) => state.products);
+  const filter = useSelector((state: StateType) => state.filter.search);
+  const category = useSelector((state: StateType) => state.filter.category);
   useEffect(() => {
     const getData = async () => {
       try {

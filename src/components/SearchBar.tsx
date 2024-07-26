@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import {
   Box,
   TextField,
@@ -11,15 +11,19 @@ import {
 } from "@mui/material";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { useDispatch, useSelector } from "react-redux";
+import { StateType } from "../types";
 
 const SearchBar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState<string>("");
 
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categories);
-  const categoryFilter = useSelector((state) => state.filter.category);
+  const categories = useSelector((state: StateType) => state.categories);
+  const categoryFilter = useSelector(
+    (state: StateType) => state.filter.category
+  );
 
+  // fix the typing here
   const handleToggleFilters = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -28,18 +32,15 @@ const SearchBar = () => {
     setAnchorEl(null);
   };
 
-  const handleProductSearch = (event) => {
+  const handleProductSearch = (event: ChangeEvent<HTMLInputElement>) => {
     const newSearchFilter = event.target.value;
     setSearch(newSearchFilter);
     dispatch({ type: "FILTER", payload: newSearchFilter });
   };
 
-  const handleFilterChange = (event) => {
+  const handleFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedValue = event.target.value;
     dispatch({ type: "CATEGORY", payload: selectedValue });
-
-    // debug
-    console.log("Selected Filter:", selectedValue);
   };
 
   return (

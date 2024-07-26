@@ -14,7 +14,6 @@ import Stepper from "@mui/material/Stepper";
 import Typography from "@mui/material/Typography";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { PaletteMode } from "@mui/material";
 
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 
@@ -27,7 +26,6 @@ import Info from "./Info";
 import InfoMobile from "./InfoMobile";
 import PaymentForm from "./PaymentForm";
 import Review from "./Review";
-import ToggleColorMode from "./ToggleColorMode";
 
 const steps = ["Shipping address", "Payment details", "Review your order"];
 function getStepContent(step: number) {
@@ -43,14 +41,8 @@ function getStepContent(step: number) {
   }
 }
 export default function Checkout() {
-  const [mode, setMode] = React.useState<PaletteMode>("light");
-  const [showCustomTheme, setShowCustomTheme] = React.useState(true);
-  const checkoutTheme = createTheme(getCheckoutTheme(mode));
-  const defaultTheme = createTheme({ palette: { mode } });
+  const checkoutTheme = createTheme(getCheckoutTheme("light"));
   const [activeStep, setActiveStep] = React.useState(0);
-  const toggleColorMode = () => {
-    setMode((prev) => (prev === "dark" ? "light" : "dark"));
-  };
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -59,7 +51,7 @@ export default function Checkout() {
     setActiveStep(activeStep - 1);
   };
   return (
-    <ThemeProvider theme={showCustomTheme ? checkoutTheme : defaultTheme}>
+    <ThemeProvider theme={checkoutTheme}>
       <CssBaseline />
       <Grid container sx={{ height: { xs: "100%", sm: "100dvh" } }}>
         <Grid
@@ -100,7 +92,7 @@ export default function Checkout() {
               maxWidth: 500,
             }}
           >
-            <Info totalPrice={activeStep >= 2 ? "$144.97" : "$134.98"} />
+            <Info />
           </Box>
         </Grid>
         <Grid
@@ -145,7 +137,6 @@ export default function Checkout() {
               >
                 Back to {/*fix this */}
               </Button>
-              <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
             </Box>
             <Box
               sx={{
@@ -157,15 +148,10 @@ export default function Checkout() {
                 height: 150,
               }}
             >
-              <ToggleColorMode
-                data-screenshot="toggle-mode"
-                mode={mode}
-                toggleColorMode={toggleColorMode}
-              />
               <Stepper
                 id="desktop-stepper"
                 activeStep={activeStep}
-                sx={{ width: "100%", height: 40 }}
+                sx={{ width: "100%", height: 40, mt: "150px" }}
               >
                 {steps.map((label) => (
                   <Step

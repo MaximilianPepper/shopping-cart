@@ -12,9 +12,13 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { ProductItem } from "../types";
 
-const ProductCard = ({ obj }) => {
-  const [quantity, setQuantity] = useState(0);
+interface ProductCardProps {
+  obj: ProductItem;
+}
+const ProductCard = ({ obj }: ProductCardProps) => {
+  const [quantity, setQuantity] = useState<number>(0);
   const title = obj.title;
   const image = obj.image;
   // const description = obj.description; removed this because i want to create a route to display information (TODO)

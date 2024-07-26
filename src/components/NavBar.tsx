@@ -1,4 +1,3 @@
-//import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -9,8 +8,9 @@ import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import reactLogo from "../assets/react.svg";
 import { useSelector } from "react-redux";
+import { StateType } from "../types";
 function NavBar() {
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state: StateType) => state.cart);
 
   let cartCounter = 0;
   if (Array.isArray(cart) && cart.length > 0) {
@@ -20,7 +20,7 @@ function NavBar() {
     <AppBar
       position="fixed"
       sx={{
-        backgroundColor: "rgba(240, 240, 240, 0.5)",
+        backgroundColor: "rgba(240, 240, 240, 0.9)",
         padding: "5px",
         color: "black",
       }}
