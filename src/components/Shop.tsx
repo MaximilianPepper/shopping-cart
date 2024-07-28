@@ -43,7 +43,7 @@ const Shop = () => {
         maxWidth={false}
         disableGutters
         sx={{
-          mt: "100px", // navbar fix
+          mt: "10px",
           display: "flex",
           flexDirection: "row",
           justifyContent: "center",

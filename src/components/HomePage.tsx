@@ -2,12 +2,13 @@ import img from "../assets/photo1.png";
 import { Box, Typography } from "@mui/material";
 import ScrollingText from "./ScrollingText";
 import { Container } from "@mui/material";
+import Lorem from "./Lorem";
 const HomePage = () => {
   return (
     <>
       <Container
         sx={{
-          mt: "100px", // navbar fix
+          mt: "-20px", // navbar fix
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -39,7 +40,7 @@ const HomePage = () => {
               textAlign: "center",
             }}
           >
-            <Box sx={{ width: "100%", textAlign: "left" }}>
+            <Box sx={{ width: "100%", textAlign: "left", color: "black" }}>
               <Typography
                 variant="h6"
                 component="div"
@@ -54,7 +55,7 @@ const HomePage = () => {
                 The best
               </Typography>
             </Box>
-            <Box sx={{ width: "100%", textAlign: "center" }}>
+            <Box sx={{ width: "100%", textAlign: "center", color: "black" }}>
               <Typography
                 variant="h6"
                 component="div"
@@ -70,7 +71,7 @@ const HomePage = () => {
                 fake products,
               </Typography>
             </Box>
-            <Box sx={{ width: "100%", textAlign: "right" }}>
+            <Box sx={{ width: "100%", textAlign: "right", color: "black" }}>
               <Typography
                 variant="h6"
                 component="div"
@@ -102,6 +103,7 @@ const HomePage = () => {
         </Box>
       </Container>
       <ScrollingText />
+      <Lorem />
     </>
   );
 };

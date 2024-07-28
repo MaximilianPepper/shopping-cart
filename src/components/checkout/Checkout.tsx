@@ -26,6 +26,8 @@ import Info from "./Info";
 import InfoMobile from "./InfoMobile";
 import PaymentForm from "./PaymentForm";
 import Review from "./Review";
+import { useSelector } from "react-redux";
+import { StateType } from "../../types";
 
 const steps = ["Shipping address", "Payment details", "Review your order"];
 function getStepContent(step: number) {
@@ -43,7 +45,8 @@ function getStepContent(step: number) {
 export default function Checkout() {
   const checkoutTheme = createTheme(getCheckoutTheme("light"));
   const [activeStep, setActiveStep] = React.useState(0);
-
+  const cart = useSelector((state: StateType) => state.cart);
+  const n = cart.reduce((p, c) => p + c.amount, 0);
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
@@ -155,7 +158,10 @@ export default function Checkout() {
               >
                 {steps.map((label) => (
                   <Step
-                    sx={{ ":first-child": { pl: 0 }, ":last-child": { pr: 0 } }}
+                    sx={{
+                      ":first-of-type": { pl: 0 },
+                      ":last-child": { pr: 0 },
+                    }}
                     key={label}
                   >
                     <StepLabel>{label}</StepLabel>
@@ -178,13 +184,9 @@ export default function Checkout() {
                 <Typography variant="subtitle2" gutterBottom>
                   Selected products
                 </Typography>
-                <Typography variant="body1">
-                  {activeStep >= 2 ? "$144.97" : "$134.98"}
-                </Typography>
+                <Typography variant="body1">{n}</Typography>
               </div>
-              <InfoMobile
-                totalPrice={activeStep >= 2 ? "$144.97" : "$134.98"}
-              />
+              <InfoMobile />
             </CardContent>
           </Card>
           <Box
@@ -207,7 +209,7 @@ export default function Checkout() {
               {steps.map((label) => (
                 <Step
                   sx={{
-                    ":first-child": { pl: 0 },
+                    ":first-of-type": { pl: 0 },
                     ":last-child": { pr: 0 },
                     "& .MuiStepConnector-root": { top: { xs: 6, sm: 12 } },
                   }}

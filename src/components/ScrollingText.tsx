@@ -1,69 +1,22 @@
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import { keyframes } from "@mui/system";
-
-const scrollText = keyframes`
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-`;
-// find a fix for the bar not correctly working
-// find a fix for content resizing when vh changes, only resize when vw changes
+import "../scrollingText.css";
 
 const ScrollingText = () => {
   return (
-    <Box
-      sx={{
-        width: "100%",
-        backgroundColor: "black",
-        color: "white",
-        overflow: "hidden",
-        whiteSpace: "nowrap",
-        position: "relative",
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
+    <>
+      <section className="a-section">
+        <div className="a-section-marquee-box">
+          <h2 className="marquee-text">fake products - real prices •</h2>
+          <h2 className="marquee-text">fake products - real prices •</h2>
+        </div>
+      </section>
 
-          whiteSpace: "nowrap",
-        }}
-      >
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{
-            textAlign: "center",
-            display: "inline-block",
-            minWidth: "100vw",
-            lineHeight: "2",
-            fontSize: "2rem",
-            animation: `${scrollText} 16s linear infinite`,
-          }}
-        >
-          This is the scrolling text that loops around. This is the scrolling
-          text that loops around.
-        </Typography>
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{
-            textAlign: "center",
-            display: "inline-block",
-            minWidth: "100vw",
-            lineHeight: "2",
-            fontSize: "2rem",
-            animation: `${scrollText} 16s linear infinite`,
-          }}
-        >
-          This is the scrolling text that loops around. This is the scrolling
-          text that loops around.
-        </Typography>
-      </Box>
-    </Box>
+      <section className="b-section">
+        <div className="b-section-marquee-box">
+          <h2 className="marquee-text">fake products - real prices •</h2>
+          <h2 className="marquee-text">fake products - real prices •</h2>
+        </div>
+      </section>
+    </>
   );
 };
 

@@ -23,6 +23,8 @@ function NavBar() {
         backgroundColor: "rgba(240, 240, 240, 0.9)",
         padding: "5px",
         color: "black",
+        fontFamily: "Inter,san-serif",
+        boxSizing: "border-box",
       }}
     >
       <Toolbar>
@@ -36,7 +38,7 @@ function NavBar() {
           <Typography
             variant="h6"
             component="div"
-            fontSize={"2em"}
+            fontSize={"30px"}
             marginRight={"30px"}
           >
             Fake Shop
@@ -53,7 +55,7 @@ function NavBar() {
               color: "inherit",
               textDecoration: "none",
               marginRight: 30,
-              fontSize: "2em",
+              fontSize: "30px",
             }}
           >
             Home
@@ -64,7 +66,7 @@ function NavBar() {
               color: "inherit",
               textDecoration: "none",
               marginRight: 30,
-              fontSize: "2em",
+              fontSize: "30px",
             }}
           >
             Shop

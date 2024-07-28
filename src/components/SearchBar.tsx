@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useState } from "react";
 import {
   Box,
   TextField,
@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { StateType } from "../types";
 
 const SearchBar = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [search, setSearch] = useState<string>("");
 
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const SearchBar = () => {
   );
 
   // fix the typing here
-  const handleToggleFilters = (event) => {
+  const handleToggleFilters = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 

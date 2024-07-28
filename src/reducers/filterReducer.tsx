@@ -1,4 +1,7 @@
-const filterReducer = (state = { search: "", category: "all" }, action) => {
+const filterReducer = (
+  state = { search: "", category: "all" },
+  action: { type: string; payload: string }
+) => {
   switch (action.type) {
     case "FILTER":
       return { ...state, search: action.payload.toLowerCase() };

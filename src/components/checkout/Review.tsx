@@ -8,6 +8,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
+import { StateType } from "../../types";
 
 const addresses = ["1 MUI Drive", "Reactville", "Anytown", "99999", "USA"];
 const payments = [
@@ -18,7 +19,7 @@ const payments = [
 ];
 
 export default function Review() {
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state: StateType) => state.cart);
   const totalPrice = cart
     .reduce((p, c) => p + c.price * c.amount, 0)
     .toFixed(2);

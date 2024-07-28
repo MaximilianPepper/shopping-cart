@@ -1,4 +1,9 @@
-const productsReducer = (state = [], action) => {
+import { ProductItem } from "../types";
+
+const productsReducer = (
+  state = [],
+  action: { type: string; payload: ProductItem[] }
+) => {
   switch (action.type) {
     case "SET":
       return action.payload;
