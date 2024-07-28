@@ -19,7 +19,7 @@ const store = createStore(reducer);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Router>
+    <Router basename="/shopping-cart">
       <Provider store={store}>
         <App />
       </Provider>
