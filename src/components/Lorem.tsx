@@ -26,8 +26,8 @@ const JournalTitle = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(2),
   fontSize: "2em",
   lineHeight: 1.4,
-  breakInside: "avoid", // Prevents breaking the title in the middle
-  columnSpan: "all", // Makes sure the title spans across all columns
+  breakInside: "avoid",
+  columnSpan: "all",
 }));
 
 const Lorem = () => {
@@ -38,9 +38,12 @@ const Lorem = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
+        minHeight: "100vh",
         padding: 2,
         mt: "15px",
+        "@media (max-width: 600px)": {
+          padding: 1,
+        },
       }}
     >
       <JournalContainer>

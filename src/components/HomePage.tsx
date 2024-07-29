@@ -8,7 +8,11 @@ const HomePage = () => {
     <>
       <Container
         sx={{
-          mt: "-20px", // navbar fix
+          mt: {
+            xs: "120px",
+            md: "-20px",
+          },
+          // navbar fix on small screen it was overlapping somhow (LOOK INTO THIS)
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",

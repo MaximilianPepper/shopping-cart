@@ -11,3 +11,13 @@ Checkout works without the need to input any data.
 - Material UI for styling
 
 [Fake Store API](https://fakestoreapi.com/) is used to fetch placeholder data.
+
+# TODO
+
+- loading icon for first fetch (simulate larger dataset)
+- confirmation popup after each purchase
+- add a footer
+
+- fix responsivness on mobile (homepage)
+
+- minor style changes
