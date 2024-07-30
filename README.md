@@ -14,10 +14,9 @@ Checkout works without the need to input any data.
 
 # TODO
 
-- loading icon for first fetch (simulate larger dataset)
 - confirmation popup after each purchase
 - add a footer
 
-- fix responsivness on mobile (homepage)
+- fix responsivness on mobile (product card)
 
 - minor style changes
